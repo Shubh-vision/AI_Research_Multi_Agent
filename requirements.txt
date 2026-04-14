@@ -1,0 +1,13 @@
+langchain
+langchain-core
+langchain-community
+langchain-groq
+langgraph
+tiktoken
+beautifulsoup4
+requests
+orjson
+pydantic
+html5lib
+lxml
+python-dotenv
