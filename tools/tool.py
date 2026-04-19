@@ -18,33 +18,15 @@ tavily = TavilyClient(api_key=tavily_api_key)
 def web_search(query: str):
     result = tavily.search(query=query, max_results=3)
 
-    return [
-        {
-            "title": r["title"],
-            "url": r["url"],
-            "content": r["content"]
-        }
-        for r in result["results"]
-    ]
+    output = []
 
-# ================= SCRAPER =================
-# def fetch_url(url: str) -> str:
-#     try:
-#         headers = {"User-Agent": "Mozilla/5.0"}
-#         resp = requests.get(url, headers=headers, timeout=8)
-
-#         if resp.status_code != 200:
-#             return f"Failed to fetch (status {resp.status_code})"
-
-#         soup = BeautifulSoup(resp.text, "html.parser")
-
-#         for tag in soup(["script", "style", "nav", "footer", "header", "aside"]):
-#             tag.decompose()
-
-#         return soup.get_text(separator=" ", strip=True)[:2000]
-
-#     except Exception as e:
-#         return f"Error fetching URL: {str(e)}"
+    for r in result["results"]:
+        output.append(
+            f"Title: {r['title']}\n"
+            f"URL: {r['url']}\n"
+            f"Content: {r['content'][:300]}"
+        )
+    return "\n\n--------\n\n".join(output)    
 
 # beautiful soap
 def fetch_url(url: str) -> str:
@@ -58,5 +40,5 @@ def fetch_url(url: str) -> str:
 
         return soup.get_text(separator=" ", strip=True)[:2000]
 
-    except:
-        return ""
+    except Exception as e:
+        return f"Error fetching URL: {str(e)}"

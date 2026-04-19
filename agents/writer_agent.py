@@ -9,8 +9,8 @@ Write a research report.
 
 Topic: {query}
 
-Content:
-{content}
+Data:
+{data}
 
 Include:
 - Introduction
@@ -19,14 +19,12 @@ Include:
 - Sources
 """)
 
+writer_chain = writer_prompt | llm | parser
+
 def writer_node(state: AgentState):
-    print("\n✍️ Writing...")
-
-    chain = writer_prompt | llm | parser
-
-    report = chain.invoke({
+    report = writer_chain.invoke({
         "query": state["query"],
-        "content": state["content"]
+        "data": state["reader_result"]
     })
 
     return {**state, "report": report}

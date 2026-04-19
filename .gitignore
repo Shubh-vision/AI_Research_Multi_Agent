@@ -6,3 +6,5 @@ AI-research\
 
 __pycache__
 .env
+app.py/
+app.py\
