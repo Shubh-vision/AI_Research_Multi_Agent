@@ -12,3 +12,5 @@ html5lib
 lxml
 python-dotenv
 streamlit
+tavily
+tavily-python
