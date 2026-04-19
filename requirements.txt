@@ -11,3 +11,4 @@ pydantic
 html5lib
 lxml
 python-dotenv
+streamlit
