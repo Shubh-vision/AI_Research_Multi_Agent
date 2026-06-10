@@ -6,5 +6,12 @@ from tools.tool import web_search
 
 def search_node(state: AgentState):
 
-    result = web_search(state["query"])
-    return {**state, "search_result": result}
+    results = web_search(state["query"])
+
+    urls = [r["url"] for r in results]
+
+    return {
+        **state,
+        "search_result": results,
+        "urls": urls
+    }

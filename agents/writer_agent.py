@@ -5,9 +5,16 @@ from agents.reader_agent import reader_node
 
 
 writer_prompt = ChatPromptTemplate.from_template("""
-Write a research report.
+You MUST use only the provided data.
 
-Topic: {query}
+Never use your own knowledge.
+
+Every key finding must be supported by the supplied data.
+
+If the data does not contain the answer, explicitly say so.
+
+Topic:
+{query}
 
 Data:
 {data}
@@ -26,5 +33,6 @@ def writer_node(state: AgentState):
         "query": state["query"],
         "data": state["reader_result"]
     })
+
 
     return {**state, "report": report}

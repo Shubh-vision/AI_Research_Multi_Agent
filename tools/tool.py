@@ -16,19 +16,17 @@ tavily = TavilyClient(api_key=tavily_api_key)
 
 # ================= SEARCH =================
 def web_search(query: str):
-    result = tavily.search(query=query, max_results=3)
+    result = tavily.search(query=query,   
+                           days=7,
+                           search_depth="basic",
+                           max_results=3,
+                           include_raw_content=False)
+    return result["results"]
 
-    output = []
 
-    for r in result["results"]:
-        output.append(
-            f"Title: {r['title']}\n"
-            f"URL: {r['url']}\n"
-            f"Content: {r['content'][:300]}"
-        )
-    return "\n\n--------\n\n".join(output)    
 
-# beautiful soap
+
+# beautiful soup
 def fetch_url(url: str) -> str:
     try:
         headers = {"User-Agent": "Mozilla/5.0"}

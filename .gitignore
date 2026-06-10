@@ -8,3 +8,7 @@ __pycache__
 .env
 app.py/
 app.py\
+
+.research
+research
+research\
